@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface PersonDBRepository extends JpaRepository<PersonDB, Integer> {
     //   List<PersonDB> findByAge(Integer name);
-    List<PersonDB> findById(int id);
+    List<PersonDB> findByAge(Integer Age);
 
     List<PersonDB> findByName(String Name);
 

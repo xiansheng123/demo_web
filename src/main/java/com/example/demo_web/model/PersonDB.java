@@ -8,6 +8,13 @@ import java.util.Date;
 @Entity
 @Table(name = "Tabtest")
 public class PersonDB {
+    public PersonDB(){}
+    public PersonDB(String name,Integer age,Boolean sex){
+      this.setName(name);
+     this.setAge(age);
+     this.setSex(sex);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
@@ -17,10 +24,10 @@ public class PersonDB {
     private String name;
 
     @Column(name = "Age")
-    private String age;
+    private Integer age;
 
     @Column(name = "Sex")
-    private boolean sex;
+    private Boolean sex;
 
     public int getId() {
         return id;
@@ -38,19 +45,19 @@ public class PersonDB {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public boolean isSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 }
