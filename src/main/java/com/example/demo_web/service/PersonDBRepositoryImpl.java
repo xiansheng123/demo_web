@@ -14,7 +14,7 @@
 //public class PersonDBRepositoryImpl implements PersonDBRepository {
 //
 //
-//   public PersonDB findByName(String Name);
+//   public PersonDB findByName(String Group1);
 //
 //
 //

@@ -1,6 +1,8 @@
 package com.example.demo_web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 /**
  * Created by luxuda on 6/20/2017.
@@ -20,9 +22,13 @@ public class PersonDB {
     @Column(name = "ID")
     private int id;
 
+   // @NotNull
     @Column(name = "Name")
+     @SystemcodeVal(message="Name should be in the DB")
     private String name;
 
+    //@Min(message="Age should be great than 10",value = 10)
+  // @SystemcodeVal(message="Age should be great than 11", min=11)
     @Column(name = "Age")
     private Integer age;
 
@@ -61,3 +67,4 @@ public class PersonDB {
         this.sex = sex;
     }
 }
+
