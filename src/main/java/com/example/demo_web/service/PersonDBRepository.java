@@ -20,10 +20,10 @@ public interface PersonDBRepository extends JpaRepository<PersonDB, Integer> {
     List<PersonDB> findByAge(Integer Age);
     List<PersonDB> findByName(String Name);
     @Procedure(name="Demo_Test")
-    void Demo_Test(@Param("Group1") String name,@Param("Age") Integer age);
+    void Demo_Test(@Param("Name") String name,@Param("Age") Integer age);
 
-    @Procedure(name="Demo_Test_out")
-    String Demo_Test_out(@Param("Group1") String name, @Param("Age") Integer age);
+    @Procedure(name="Demo_Test_out" )
+    String Demo_Test_out(@Param("Name") String name, @Param("Age") Integer age);
 }
 
 

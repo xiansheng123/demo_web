@@ -70,10 +70,8 @@ public class PersonDBController {
     }
 
     @RequestMapping(value = "/runProcedureout")
-    public void RunProcedureout (  ){
-
-       String aa= personServiceDB.Demo_Test_out("benchiout",90);
-       System.out.print(aa);
+    public String RunProcedureout (  ){
+       return  personServiceDB.Demo_Test_out("benchiout",90);
     }
 
     //update and insert

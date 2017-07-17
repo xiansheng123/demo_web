@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy=SystemcodeValidator.class)
 public @interface SystemcodeVal {
     //int min() default 0;
-    String message();
+    String message() default "SystemcodeVal error";;
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

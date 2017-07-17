@@ -44,9 +44,6 @@ public class SystemcodeValidator implements ConstraintValidator<SystemcodeVal, S
            constraintContext.disableDefaultConstraintViolation();
             constraintContext.buildConstraintViolationWithTemplate(systemcode.message()).addConstraintViolation();
         }
-
-
-
         return isValid;
 
     }

@@ -9,6 +9,14 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Tabtest")
+
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "Demo_Test_out", procedureName = "Demo_Test_out", parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "Name", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "Age", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "info", type = String.class) })
+})
+
 public class PersonDB {
     public PersonDB(){}
     public PersonDB(String name,Integer age,Boolean sex){
