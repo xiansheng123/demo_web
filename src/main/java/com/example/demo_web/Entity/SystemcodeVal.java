@@ -1,4 +1,5 @@
 package com.example.demo_web.Entity;
+
 import java.lang.annotation.*;
 
 import javax.validation.Constraint;
@@ -11,12 +12,14 @@ import javax.validation.Payload;
 
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy=SystemcodeValidator.class)
+@Constraint(validatedBy = SystemcodeValidator.class)
+@Documented
 public @interface SystemcodeVal {
-    //int min() default 0;
-    String message() default "SystemcodeVal error";;
+    String isNeedPatch() default "NO";
+    String message() default "SystemcodeVal error";
 
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
 }

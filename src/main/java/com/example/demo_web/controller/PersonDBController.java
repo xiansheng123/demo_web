@@ -1,5 +1,6 @@
 package com.example.demo_web.controller;
 
+import com.example.demo_web.Util.Func;
 import com.example.demo_web.dto.PersonDTO;
 import com.example.demo_web.dto.PersonAndSystemCode;
 import com.example.demo_web.dto.SystemCodeDTO;
@@ -7,10 +8,14 @@ import com.example.demo_web.Entity.PersonDB;
 import com.example.demo_web.Entity.SystemCode;
 import com.example.demo_web.service.PersonDBRepository;
 import com.example.demo_web.service.SystemCodeDBRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.xml.crypto.Data;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 
@@ -33,13 +38,13 @@ public class PersonDBController {
     @RequestMapping(value = "/getPersons")
     public List<PersonDB> getAll() {
         List<PersonDB> entity = personServiceDB.findAll();
-        return  entity;//ConvertLongDate(entity.stream().filter(x -> x.getId() == 64).findFirst().get().getAddedDate2());
+        return entity;//ConvertLongDate(entity.stream().filter(x -> x.getId() == 64).findFirst().get().getAddedDate2());
     }
 
     @RequestMapping(value = "/getDate")
     public String getDate() {
-        Timestamp aa = ConvertTimeStamp("2017-11-14 09:35:44:123+08:00");
-        return ConvertLongDate(aa);
+        Timestamp aa = Func.ConvertTimeStamp("2017-11-14 09:35:44:123+08:00");
+        return Func.ConvertLongDate(aa);
     }
 
 
@@ -55,19 +60,6 @@ public class PersonDBController {
         return entity;
     }
 
-    @RequestMapping(value = "/getPersonByName/{Name}")
-    public List<PersonDB> getOneByName(@PathVariable("Name") String name) {
-        List<PersonDB> entity = personServiceDB.findByName(name);
-        // System.out.println(personServiceDB.findByName("tom"));
-
-        if (entity==null)
-        {return  null   ;}
-        if(entity.isEmpty())
-        { entity.add(new PersonDB(18,"noperson"));
-        }
-        return entity;
-    }
-
     @RequestMapping(value = "/getPersonByAge/{Age}")
     public List<PersonDB> getOneByName(@PathVariable("Age") Integer age) {
         List<PersonDB> entity = personServiceDB.findByAge(age);
@@ -77,7 +69,11 @@ public class PersonDBController {
 
     @RequestMapping(value = "/addHardPerson")
     public PersonDB AddHardPerson() {
-        PersonDB person = new PersonDB("ZouXuan", 27, false);
+        PersonDB person = PersonDB.builder().name("ZouXuan")
+                .age(13)
+                .sex(false)
+                .AddedDate(new Timestamp(new Date().getTime()))
+                .build();
         personServiceDB.save(person);
         return person;
     }
@@ -93,18 +89,14 @@ public class PersonDBController {
         return personServiceDB.Demo_Test_out("benchiout", 90);
     }
 
-    //update and insert
-    //  @RequestMapping(method = RequestMethod.POST ,value = "/addPerson")
     @PostMapping(value = "/addPerson")
-    public String AddPerson( @RequestBody PersonDB person) {
-
-//        if (br.hasErrors()) {
-//            return "Validate failed :";//+br.getAllErrors();
-//        } else {
+    public String AddPerson(@RequestBody @Validated PersonDB person, BindingResult br) {
+        if (br.hasErrors()) {
+            return "Validate failed :" + br.getAllErrors();
+        } else {
             personServiceDB.save(person);
             return "save Successfully ";
-  //      }
-
+        }
     }
 
     //update and insert
@@ -139,18 +131,7 @@ public class PersonDBController {
         return req;
     }
 
-    private String ConvertLongDate(Timestamp timestamp) {
-        SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSSZ");
-        Date date = new Date(timestamp.getTime());
-        return stf.format(date);
-    }
 
-    private Timestamp ConvertTimeStamp(String time) {
-
-        SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-        Timestamp timestamp = new Timestamp(stf.parse(time, new ParsePosition(0)).getTime());
-        return timestamp;
-    }
 
 }
 
