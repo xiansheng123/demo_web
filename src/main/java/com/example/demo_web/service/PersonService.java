@@ -5,7 +5,7 @@ package com.example.demo_web.service;
  */
 
 import org.springframework.stereotype.Service;
-import com.example.demo_web.model.Person;
+import com.example.demo_web.Entity.Person;
 import java.util.Hashtable;
 
 @Service

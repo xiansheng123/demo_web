@@ -1,7 +1,7 @@
 package com.example.demo_web.service;
 
 
-import com.example.demo_web.model.SystemCode;
+import com.example.demo_web.Entity.SystemCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.example.demo_web.model;
+package com.example.demo_web.Entity;
 import java.lang.annotation.*;
 
 import javax.validation.Constraint;

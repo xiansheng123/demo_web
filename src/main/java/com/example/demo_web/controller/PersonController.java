@@ -8,9 +8,7 @@ import java.util.Hashtable;
 import com.example.demo_web.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo_web.model.Person;
-
-import javax.websocket.server.PathParam;
+import com.example.demo_web.Entity.Person;
 
 @RestController
 @RequestMapping("/persons")

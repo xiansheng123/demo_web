@@ -1,14 +1,12 @@
-package com.example.demo_web.model;
+package com.example.demo_web.Entity;
 
 
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.annotation.Resource;
 
 import com.example.demo_web.service.SystemCodeDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.util.List;
 
