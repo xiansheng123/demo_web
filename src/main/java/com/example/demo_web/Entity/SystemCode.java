@@ -1,15 +1,18 @@
 package com.example.demo_web.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-/**
- * Created by luxuda on 7/16/2017.
- */
 @Entity
-@Table(name = "sec_systemcode")
+@Table(name = "sec_systemcode",uniqueConstraints = {@UniqueConstraint(columnNames="groupName")})
 @Data
+ @AllArgsConstructor
+ @NoArgsConstructor
+@Builder
 public class SystemCode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

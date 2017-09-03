@@ -4,29 +4,32 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import javax.xml.ws.Action;
 import java.sql.Timestamp;
 
 
-/**
- * Created by luxuda on 6/20/2017.
- */
 @Entity
 @Data
 @Table(name = "Tabtest")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(PKForPerson.class)
+//@IdClass(PKForPerson.class)
 public class PersonDB {
+    @Column(name = "id")
+    @Id
+    private Integer id;
 
-    // @NotNull
-    @Id
     @Column(name = "name")
-    @SystemcodeVal(message="Name should be in the DB",isNeedPatch = "YES")
+//    @SystemcodeVal(message="Name should be in the DB",isNeedPatch = "YES")
     private String name;
-    @Id
+
+    //@Id
     //@Min(message="Age should be great than 10",value = 10)
     @Column(name = "age")
     private Integer age;
@@ -35,8 +38,12 @@ public class PersonDB {
     private Boolean sex;
 
     @Column(name = "addeddate")
-    private Timestamp AddedDate;
+    private Timestamp addedDate;
 
-
+    @OneToOne(fetch = FetchType.LAZY ,cascade =CascadeType.ALL
+    )
+    @JoinColumn(name = "country" )
+    @NotFound(action = NotFoundAction.IGNORE)
+    private SystemCode contryCode;
 }
 

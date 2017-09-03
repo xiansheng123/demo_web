@@ -1,5 +1,7 @@
 package com.example.demo_web.Entity;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.lang.annotation.*;
 
 import javax.validation.Constraint;
@@ -16,11 +18,11 @@ import javax.validation.Payload;
 @Documented
 public @interface SystemcodeVal {
     String isNeedPatch() default "NO";
-    String message() default "SystemcodeVal error";
-
+    String lable() default "";
+    String message() default  "this %s is not exists";
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
+
 
 }
 

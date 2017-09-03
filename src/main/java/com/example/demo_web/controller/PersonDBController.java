@@ -6,29 +6,22 @@ import com.example.demo_web.dto.PersonAndSystemCode;
 import com.example.demo_web.dto.SystemCodeDTO;
 import com.example.demo_web.Entity.PersonDB;
 import com.example.demo_web.Entity.SystemCode;
-import com.example.demo_web.service.PersonDBRepository;
-import com.example.demo_web.service.SystemCodeDBRepository;
-import org.joda.time.DateTime;
+import com.example.demo_web.respository.PersonDBRepository;
+import com.example.demo_web.respository.SystemCodeDBRepository;
+import com.example.demo_web.service.PersonDBService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.xml.crypto.Data;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-
+import javax.websocket.server.PathParam;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by luxuda on 6/20/2017.
- */
 @RestController
 public class PersonDBController {
-
+    @Autowired
+    private PersonDBService personDBService;
 
     @Autowired
     private PersonDBRepository personServiceDB;
@@ -37,13 +30,13 @@ public class PersonDBController {
 
     @RequestMapping(value = "/getPersons")
     public List<PersonDB> getAll() {
-        List<PersonDB> entity = personServiceDB.findAll();
-        return entity;//ConvertLongDate(entity.stream().filter(x -> x.getId() == 64).findFirst().get().getAddedDate2());
+        List<PersonDB> entities = personServiceDB.findAll();
+        return entities;//ConvertLongDate(entity.stream().filter(x -> x.getId() == 64).findFirst().get().getAddedDate2());
     }
 
     @RequestMapping(value = "/getDate")
     public String getDate() {
-        Timestamp aa = Func.ConvertTimeStamp("2017-11-14 09:35:44:123+08:00");
+        Timestamp aa = Func.convertTimeStamp("2017-11-14 09:35:44:123+08:00");
         return Func.ConvertLongDate(aa);
     }
 
@@ -61,18 +54,30 @@ public class PersonDBController {
     }
 
     @RequestMapping(value = "/getPersonByAge/{Age}")
-    public List<PersonDB> getOneByName(@PathVariable("Age") Integer age) {
-        List<PersonDB> entity = personServiceDB.findByAge(age);
+    public Object getOneByName(@PathVariable("Age") Integer age) {
+        //List<PersonDB> entity = personServiceDB.findByAge(age);
         // System.out.println(personServiceDB.findByName("tom"));
-        return entity;
+        PersonDB entity1 = personServiceDB.findFirstByAge(age);
+        PersonDB entity2 = personServiceDB.findFirstByAge(age);
+        List<PersonDB> entity3 = personServiceDB.findByAge(age);
+        List<PersonDB> entity4 = personServiceDB.findFirst10ByAge(age);
+        if(entity3.isEmpty()) {
+            return "is empty";}
+        return entity2;
     }
 
     @RequestMapping(value = "/addHardPerson")
     public PersonDB AddHardPerson() {
-        PersonDB person = PersonDB.builder().name("ZouXuan")
+        PersonDB person = PersonDB.builder()
+                .id(67)
+                .name("ZouXuan")
                 .age(13)
                 .sex(false)
-                .AddedDate(new Timestamp(new Date().getTime()))
+                .addedDate(new Timestamp(new Date().getTime()))
+                .contryCode(SystemCode.builder()
+                        .groupName("group")
+                        .codename("xu")
+                        .build())
                 .build();
         personServiceDB.save(person);
         return person;
@@ -85,18 +90,25 @@ public class PersonDBController {
     }
 
     @RequestMapping(value = "/runProcedureout")
-    public String RunProcedureout() {
+    public Object RunProcedureout() {
         return personServiceDB.Demo_Test_out("benchiout", 90);
     }
 
     @PostMapping(value = "/addPerson")
-    public String AddPerson(@RequestBody @Validated PersonDB person, BindingResult br) {
-        if (br.hasErrors()) {
-            return "Validate failed :" + br.getAllErrors();
-        } else {
-            personServiceDB.save(person);
-            return "save Successfully ";
+    public Object AddPerson(@RequestBody PersonDB person) {
+        personServiceDB.save(person);
+        return "save Successfully";
+    }
+
+    @GetMapping(value = "/getOnePerson/{id}")
+    public Object getonePerson(@PathVariable("id") String id) {
+        PersonDB personDB;
+        try {
+            personDB = personServiceDB.findOne(Integer.valueOf(id));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
+        return  personDB.getContryCode().getCodename();
     }
 
     //update and insert
@@ -131,6 +143,11 @@ public class PersonDBController {
         return req;
     }
 
+    @PostMapping(value = "/test")
+    public String AddPersonAndSystemCode(@RequestBody String aa) {
+             personDBService.test();
+        return "ok";
+    }
 
 
 }

@@ -10,7 +10,7 @@ import java.util.Hashtable;
 
 @Service
 public class PersonService {
-   private Hashtable<String,Person> persons=new Hashtable<String,Person>();
+   private Hashtable<String,Person> persons=new Hashtable<String,Person>();//can't null vale and repeate key
    private int mycount=4;
    public PersonService(){
        Person p=new Person();
@@ -39,7 +39,7 @@ public class PersonService {
        if(persons.containsKey(id))
           return persons.get(id);
        else
-           return null  ;
+           return null;
    }
 
    public Hashtable<String,Person> getAll(){

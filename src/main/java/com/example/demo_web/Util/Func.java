@@ -15,9 +15,10 @@ public  class  Func {
         return stf.format(date);
     }
 
-    public static Timestamp  ConvertTimeStamp(String time) {
+    public static Timestamp convertTimeStamp(String time) {
 
         SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+        stf.setLenient(false);
         Timestamp timestamp = new Timestamp(stf.parse(time, new ParsePosition(0)).getTime());
         return timestamp;
     }

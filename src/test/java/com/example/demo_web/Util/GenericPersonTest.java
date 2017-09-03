@@ -39,4 +39,17 @@ public class GenericPersonTest {
         System.out.println(mytable.get("First"));
         System.out.println(mytable.get("Second"));
     }
+
+    @Test
+    public void mytest1()
+    {
+        int test1=1;
+        int test2=0;
+        for(int m=0;m<10;m++){
+            test1=test1++;
+            test2=++test2;
+        }
+        System.out.println(test1);
+        System.out.println(test2);
+    }
 }

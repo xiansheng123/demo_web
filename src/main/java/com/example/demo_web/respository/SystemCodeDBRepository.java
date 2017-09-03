@@ -1,4 +1,4 @@
-package com.example.demo_web.service;
+package com.example.demo_web.respository;
 
 
 import com.example.demo_web.Entity.SystemCode;
