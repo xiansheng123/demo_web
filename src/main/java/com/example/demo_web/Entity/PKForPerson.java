@@ -5,9 +5,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * Created by luxuda on 7/24/2017.
- */
 @Data
 public class PKForPerson implements Serializable {
 

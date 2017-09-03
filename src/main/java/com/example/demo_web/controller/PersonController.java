@@ -3,14 +3,14 @@ package com.example.demo_web.controller;
 /**
  * Created by luxuda on 6/13/2017.
  */
-import java.util.Hashtable;
 
-import com.example.demo_web.dto.PersonBean;
+import com.example.demo_web.Entity.Person;
 import com.example.demo_web.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo_web.Entity.Person;
+
+import java.util.Hashtable;
 
 @RestController
 @RequestMapping("/persons")

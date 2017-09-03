@@ -1,12 +1,14 @@
 package com.example.demo_web.Util;
 
 import com.example.demo_web.Entity.Person;
+import org.apache.tomcat.util.digester.ArrayStack;
 import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static com.example.demo_web.Util.Func.ConvertLongDate;
 import static com.example.demo_web.Util.Func.convertTimeStamp;
@@ -96,23 +98,4 @@ public class FuncTest {
         System.out.println(list);
         System.out.println(max);
     }
-
-    @Test
-    public void streamTest() {
-        List<Person> list = new ArrayList<Person>() {
-            {
-                add(new Person("1","lu1","xuda",12));
-                add(new Person("2","lu2","xuda",22));
-                add(new Person("3","lu3","xuda",33));
-                add(new Person("4","lu4","xuda",55));
-            }
-        };
-        int[] afterlist =list.stream().mapToInt(x->x.getAge()).toArray();
-        System.out.println(list);
-        System.out.println(afterlist);
-    }
-
-
-
-
 }

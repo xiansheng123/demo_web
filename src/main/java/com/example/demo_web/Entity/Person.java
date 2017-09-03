@@ -15,5 +15,5 @@ public class Person {
     String id;
     String firstname;
     String lastname;
-    int age;
+    Integer age;
 }

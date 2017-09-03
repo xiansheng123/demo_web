@@ -2,9 +2,6 @@ package com.example.demo_web.service;
 
 import com.example.demo_web.Entity.PersonDB;
 import com.example.demo_web.respository.PersonDBRepository;
-import com.example.demo_web.respository.SystemCodeDBRepository;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

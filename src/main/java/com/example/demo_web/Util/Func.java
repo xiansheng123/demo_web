@@ -5,9 +5,6 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by luxuda on 7/30/2017.
- */
 public  class  Func {
     public static String  ConvertLongDate(Timestamp timestamp) {
         SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSSZ");
