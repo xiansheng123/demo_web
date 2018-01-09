@@ -2,6 +2,7 @@ package com.example.demo_web.Util;
 
 import com.example.demo_web.Entity.Person;
 import org.apache.tomcat.util.digester.ArrayStack;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -46,9 +47,13 @@ public class FuncTest {
                 put("age", "20");
                 put("age", "21");
                 put("age1", "21");
-                put("work", null);
+                put("c", null);
+                put(null,null);
+                put(null,"11");
             }
         };
+        System.out.println (map1.containsKey ("job"));
+        System.out.println (map1.get ("work"));
         System.out.println(map1);
     }
 
@@ -70,6 +75,11 @@ public class FuncTest {
         System.out.println(map1);
     }
 
+    @Before
+    public void setUp() throws Exception {
+
+    }
+
     @Test
     public void hashtableTest() {
         Hashtable<String, String> map1 = new Hashtable<String, String>() {
@@ -79,6 +89,7 @@ public class FuncTest {
                 put("age", "21");
                 put("age1", "21");
                 put("work", "IT");
+                put("job", "aa");
             }
         };
         System.out.println(map1);

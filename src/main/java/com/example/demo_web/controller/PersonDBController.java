@@ -1,19 +1,17 @@
 package com.example.demo_web.controller;
 
-import com.example.demo_web.Util.Func;
-import com.example.demo_web.dto.PersonDTO;
-import com.example.demo_web.dto.PersonAndSystemCode;
-import com.example.demo_web.dto.SystemCodeDTO;
 import com.example.demo_web.Entity.PersonDB;
 import com.example.demo_web.Entity.SystemCode;
+import com.example.demo_web.Util.Func;
+import com.example.demo_web.dto.PersonAndSystemCode;
+import com.example.demo_web.dto.PersonDTO;
+import com.example.demo_web.dto.SystemCodeDTO;
 import com.example.demo_web.respository.PersonDBRepository;
 import com.example.demo_web.respository.SystemCodeDBRepository;
 import com.example.demo_web.service.PersonDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.websocket.server.PathParam;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -54,32 +52,48 @@ public class PersonDBController {
     }
 
     @RequestMapping(value = "/getPersonByAge/{Age}")
-    public Object getOneByName(@PathVariable("Age") Integer age) {
-        //List<PersonDB> entity = personServiceDB.findByAge(age);
-        // System.out.println(personServiceDB.findByName("tom"));
-        PersonDB entity1 = personServiceDB.findFirstByAge(age);
+    public Object getOneByAge(@PathVariable("Age") Integer age) {
         PersonDB entity2 = personServiceDB.findFirstByAge(age);
         List<PersonDB> entity3 = personServiceDB.findByAge(age);
-        List<PersonDB> entity4 = personServiceDB.findFirst10ByAge(age);
         if(entity3.isEmpty()) {
             return "is empty";}
         return entity2;
+    }
+    @RequestMapping(value = "/getPersonByName/{Name}")
+    public Object getOneByName(@PathVariable("Name") String name) {
+ ;
+        PersonDB entity = personServiceDB.findOneByName (name);
+        if(entity==null) {
+            return "is empty";}
+        return entity;
+    }
+
+    @RequestMapping(value = "/getPersonBySystemCode")
+    public Object getOneBySystemCode() {
+        PersonDB entity = personServiceDB.findOneByCountryCode (SystemCode
+                .builder ()
+                .id (11)
+                .codename ("908")
+                .build ()
+        );
+        return entity;
     }
 
     @RequestMapping(value = "/addHardPerson")
     public PersonDB AddHardPerson() {
         PersonDB person = PersonDB.builder()
-                .id(67)
+               // .id(67)
                 .name("ZouXuan")
                 .age(13)
                 .sex(false)
                 .addedDate(new Timestamp(new Date().getTime()))
-                .contryCode(SystemCode.builder()
+                .countryCode (SystemCode.builder()
                         .groupName("group")
                         .codename("xu")
                         .build())
                 .build();
         personServiceDB.save(person);
+        System.out.println(person);
         return person;
     }
 
@@ -108,7 +122,7 @@ public class PersonDBController {
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        return  personDB.getContryCode().getCodename();
+        return  personDB.getCountryCode ().getCodename();
     }
 
     //update and insert

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -21,6 +22,7 @@ import java.sql.Timestamp;
 public class PersonDB {
     @Column(name = "id")
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name")
@@ -38,10 +40,9 @@ public class PersonDB {
     @Column(name = "addeddate")
     private Timestamp addedDate;
 
-    @OneToOne(fetch = FetchType.LAZY ,cascade =CascadeType.ALL
-    )
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country" )
     @NotFound(action = NotFoundAction.IGNORE)
-    private SystemCode contryCode;
+    private SystemCode countryCode;
 }
 
