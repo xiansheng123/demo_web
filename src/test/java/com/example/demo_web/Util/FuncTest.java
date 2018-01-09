@@ -81,7 +81,7 @@ public class FuncTest {
     }
 
     @Test
-    public void hashtableTest() {
+    public void hashTableTest() {
         Hashtable<String, String> map1 = new Hashtable<String, String>() {
             {
                 put("name", "test");
