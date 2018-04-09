@@ -3,6 +3,7 @@ package com.example.demo_web.controller;
 import com.example.demo_web.Entity.CarDB;
 import com.example.demo_web.respository.CarDBRespository;
 import com.example.demo_web.service.CarService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/Cars")
+@Log4j
 public class CarDBController {
     @Autowired
     private CarDBRespository carDBRespository;

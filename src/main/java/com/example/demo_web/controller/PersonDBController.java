@@ -79,10 +79,9 @@ public class PersonDBController {
         return entity;
     }
 
-    @RequestMapping(value = "/addHardPerson")
+    @RequestMapping(value = "/addZouXuan")
     public PersonDB AddHardPerson() {
         PersonDB person = PersonDB.builder()
-               // .id(67)
                 .name("ZouXuan")
                 .age(13)
                 .sex(false)
@@ -96,7 +95,6 @@ public class PersonDBController {
         System.out.println(person);
         return person;
     }
-
     @RequestMapping(value = "/runProcedure")
     public void RunProcedure() {
         personServiceDB.Demo_Test("benchi", 89);
@@ -108,10 +106,12 @@ public class PersonDBController {
         return personServiceDB.Demo_Test_out("benchiout", 90);
     }
 
-    @PostMapping(value = "/addPerson")
-    public Object AddPerson(@RequestBody PersonDB person) {
-        personServiceDB.save(person);
-        return "save Successfully";
+    @PostMapping(value = "/personList")
+    public Object AddPerson(@RequestBody PersonDTO person) {
+        System.out.println (person.getSelect ());
+        System.out.println (person.getDemo ());
+        System.out.println (person.getName ());
+        return person;
     }
 
     @GetMapping(value = "/getOnePerson/{id}")

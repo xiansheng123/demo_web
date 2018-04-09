@@ -77,7 +77,6 @@ public class FuncTest {
 
     @Before
     public void setUp() throws Exception {
-
     }
 
     @Test
