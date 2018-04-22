@@ -19,8 +19,6 @@ public class CarDB {
     @Column(name = "model")
     private String model;
 
-    public CarDB() {
-    }
     public CarDB(int id, String name, String brand, String model) {
         this.id = id;
         this.name = name;

@@ -1,9 +1,6 @@
 package com.example.demo_web.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -13,7 +10,8 @@ import java.sql.Timestamp;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "Tabtest")
 @Builder
 @NoArgsConstructor

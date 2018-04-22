@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sec_systemcode",uniqueConstraints = {@UniqueConstraint(columnNames="groupName")})
+@Table(name = "sec_systemcode", uniqueConstraints = {@UniqueConstraint(columnNames = "groupName")})
 @Data
- @AllArgsConstructor
- @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class SystemCode {
     @Id
