@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @SpringBootApplication
-//@ComponentScan({"controller", "service"})
 @EnableCaching
 //@EnableScheduling
 public class DemoWebApplication {

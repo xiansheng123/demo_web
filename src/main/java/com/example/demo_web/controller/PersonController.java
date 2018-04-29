@@ -5,12 +5,18 @@ package com.example.demo_web.controller;
  */
 
 import com.example.demo_web.Entity.Person;
+import com.example.demo_web.Entity.SystemCode;
+import com.example.demo_web.Entity.TabTest;
+import com.example.demo_web.service.PersonDBService;
 import com.example.demo_web.service.PersonService;
+import com.example.demo_web.service.TabTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Hashtable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/persons")
@@ -18,6 +24,12 @@ public class PersonController {
 
     @Autowired
     private PersonService ps;
+
+    @Autowired
+    private PersonDBService psd;
+
+    @Autowired
+    private TabTestService tabTestService;
 
     @Value("${com.neo.description}")
     private String getProperties;
@@ -37,13 +49,11 @@ public class PersonController {
         return ps.getPerson(id);
     }
 
-    //http://localhost:8080/persons/hello?name=123
-    @RequestMapping(value = "/hello" ,method=RequestMethod.GET)
-    public String getHello (@RequestParam("name")  String name ){
-        //    public String getHello ( ){
-
-        return  "Hello 3 "  ;
+    @RequestMapping("Test/{id}")
+    public Object getSystemCode (@PathVariable("id") String id){
+       return tabTestService.getSystemCodeById(new Integer(id));
     }
+
 
     @RequestMapping(method = RequestMethod.POST ,value = "/add")
     public void getPerson (@RequestBody Person person ){

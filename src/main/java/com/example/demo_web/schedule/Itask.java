@@ -16,7 +16,7 @@ public interface Itask extends Runnable  {
         System.out.println(Thread.currentThread().getName() +"线程被调用了。:"+LocalDateTime.now ());
         long sleepTime=500;
         try {
-            System.out.println (getPersons (1).getCountryCode ().getCodename ());
+            System.out.println (getPersons (1).getCountryCode ());
             Thread.sleep ( sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace ();

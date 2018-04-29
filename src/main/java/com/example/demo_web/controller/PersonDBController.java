@@ -18,8 +18,6 @@ import java.util.List;
 
 @RestController
 public class PersonDBController {
-    @Autowired
-    private PersonDBService personDBService;
 
     @Autowired
     private PersonDBRepository personServiceDB;
@@ -45,11 +43,6 @@ public class PersonDBController {
         return entity;
     }
 
-    @RequestMapping(value = "/getHardSystemCode")
-    public List<SystemCode> getsystemCodes() {
-        List<SystemCode> entity = systemCodeDBRepository.findByCodename("ZouXuan");
-        return entity;
-    }
 
     @RequestMapping(value = "/getPersonByAge/{Age}")
     public Object getOneByAge(@PathVariable("Age") Integer age) {
@@ -59,12 +52,13 @@ public class PersonDBController {
             return "is empty";}
         return entity2;
     }
+
     @RequestMapping(value = "/getPersonByName/{Name}")
     public Object getOneByName(@PathVariable("Name") String name) {
- ;
         PersonDB entity = personServiceDB.findOneByName (name);
-        if(entity==null) {
-            return "is empty";}
+        if (entity == null) {
+            return "is empty";
+        }
         return entity;
     }
 
@@ -88,7 +82,7 @@ public class PersonDBController {
                 .addedDate(new Timestamp(new Date().getTime()))
                 .countryCode (SystemCode.builder()
                         .groupName("group")
-                        .codename("xu")
+                        //.codename("xu")
                         .build())
                 .build();
         personServiceDB.save(person);
@@ -122,7 +116,7 @@ public class PersonDBController {
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        return  personDB.getCountryCode ().getCodename();
+        return  personDB.getCountryCode ();
     }
 
     //update and insert
@@ -135,7 +129,7 @@ public class PersonDBController {
         personServiceDB.save(personDB);
 
         SystemCode systemCode = new SystemCode();
-        systemCode.setCodename(req.getSystemCodeDTO().getCodename());
+        //systemCode.setCodename(req.getSystemCodeDTO().getCodename());
         systemCode.setGroupName(req.getSystemCodeDTO().getGroupname());
         systemCodeDBRepository.save(systemCode);
         return "save Successfully ";
@@ -157,11 +151,6 @@ public class PersonDBController {
         return req;
     }
 
-    @PostMapping(value = "/test")
-    public String AddPersonAndSystemCode(@RequestBody String aa) {
-             personDBService.test();
-        return "ok";
-    }
 
 
 }

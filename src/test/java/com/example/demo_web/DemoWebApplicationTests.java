@@ -21,12 +21,8 @@ public class DemoWebApplicationTests {
 	PersonDBRepository personDBRepository;
 
 	@Test
-	public void contextLoads() {
-		 System.out.print( systemCodeDBRepository.findByCodename("ZouXuan"));
-	}
-	@Test
 	public void FindoneSystemCode() {
-		System.out.print( systemCodeDBRepository.findOne(1).getCodename().toString() );
+		//System.out.print( systemCodeDBRepository.findOne(1).getCodename().toString() );
 	}
 
 	@Test

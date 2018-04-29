@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "sec_systemcode", uniqueConstraints = {@UniqueConstraint(columnNames = "groupName")})
@@ -24,5 +25,10 @@ public class SystemCode {
 
     @Column(name = "codename")
     private String codename;
+
+//    @OneToMany
+//    @JoinColumn(name = "country")
+//    private List<TabTest> tabTestList;
+
 
 }
