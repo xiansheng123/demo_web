@@ -1,68 +1,101 @@
 package com.example.demo_web.Util;
 
-import lombok.Data;
-import org.junit.Test;
+import javafx.util.Pair;
+import lombok.experimental.var;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+class Junit5Test {
+    private String environment = "Dev";
 
-public class InterestingFuncTest {
-    //    东东从京京那里了解到有一个无限长的数字序列: 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, …(数字k在该序列中正好出现k次)。
-// 东东想知道这个数字序列的第n项是多少，你能帮帮他么。
-    //an=a1+(n-1)d
     @Test
-    public void getNumberByInput() {
-        assertEquals (3, getNumber (6));
-        assertEquals (4, getNumber (7));
-        assertEquals (4, getNumber (10));
-        assertEquals (5, getNumber (11));
-        assertEquals (18, getNumber (169));
+    void failed_Test() {
+        fail ("this is failed Test");
     }
 
-    private int getNumber(int input) {
+    @Test
+    void assumeTest() {
+        assumeTrue (Objects.equals (this.environment, "Dev"));
+    }
 
-        List<Integer> aa = new ArrayList<Integer> ();
-        for (int i = 0; i < input; i++) {
-            for (int j = 0; j < i; j++) {
-                aa.add (i);
-            }
+    @Test
+    void sortFiles() {
+        List<Integer> aa = Arrays.asList (11, 2, 13, 7, 67);
+        for (Integer i : aa) {
+            System.out.println (i);
         }
-        return aa.get (input - 1);
-    }
+//        Comparator<Integer> comparator = Comparator.naturalOrder ();
+//        aa.sort (comparator.reversed ());
 
-  @Test
-    public void compareBigDecimal_withNull(){
-      BigDecimal aa = new BigDecimal ("0.01");
-      System.out.println (  aa.compareTo (BigDecimal.ZERO)>0);
-      System.out.println (  aa.signum ()==1 );
-  }
+        Collections.sort (aa, Comparator.naturalOrder ());
+        for (Integer i : aa) {
+            System.out.println (i);
+        }
+    }
 
     @Test
-    public void TestOrElse() {
-        user aa = new user ();
-        aa.setName ("xiaoming");
-        user bb = new user ();
-        bb.setName ("xiamin");
-        Optional<user> cc = Optional.ofNullable (aa);
-        System.out.println (cc.hashCode ());
-        user ff = cc.orElse (bb);
-        System.out.println (ff.hashCode ());
-        System.out.println (bb.hashCode ());
+    void PairAndHashTableTest() {
+        //Hash Set
+        Integer int1 = 123;
+        Integer int2 = 456;
+        HashSet<Integer> aa = new HashSet<Integer> () {
+            {
+                add (null);
+                add (int1);
+                add (int2);
+            }
+        };
+        System.out.println (int1.hashCode () + " " + int2.hashCode ());
+        System.out.println ("begin aa");
+        System.out.println ("total size:" + aa.size ());
+        aa.forEach (System.out::println);
+        System.out.println ("end aa");
+
+        Hashtable<Integer, String> bb = new Hashtable<Integer, String> () {
+            {
+                put (1, "xd");
+                put (2, "gg");
+            }
+        };
+        System.out.println (bb.size ());
+
+        List<Pair<Integer, String>> cc = new LinkedList<Pair<Integer, String>> () {
+            {
+                add (new Pair (1, "11"));
+                add (new Pair (null, null));
+                add (new Pair (null, null));
+            }
+        };
+
+        HashMap<Integer, String> dd = new HashMap<Integer, String> () {
+            {
+                put (1, "xd");
+                put (2, "second");
+                put (null, "s");
+                put (null, null);
+            }
+        };
+        dd.computeIfAbsent (10, x -> "xd1");
+        BiFunction<Integer, String, String> biFunction = (k, v) -> {
+            System.out.println ("k: " + k + " v:" + v);
+            return v + "haha";
+        };
+        //dd.computeIfPresent (2, biFunction);
+        dd.computeIfPresent (2,(x,y)->y="gg");
+        System.out.println ("begin hash map");
+        System.out.println ("total size: " + dd.size ());
+        dd.forEach ((x, y) -> System.out.println ("key:" + x + " value: " + y));
+        System.out.println ("End hash map");
+
     }
-
-
-
 }
 
-@Data
-class user{
-    public user(){
-        System.out.println ("create new user");
-    }private String name;
-
-}

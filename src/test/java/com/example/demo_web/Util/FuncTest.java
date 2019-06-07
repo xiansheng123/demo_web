@@ -1,27 +1,17 @@
 package com.example.demo_web.Util;
 
-import com.ctc.wstx.util.StringUtil;
 import com.example.demo_web.Entity.Person;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.digester.ArrayStack;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import static com.example.demo_web.Util.Func.ConvertLongDate;
 import static com.example.demo_web.Util.Func.convertTimeStamp;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Created by luxuda on 8/6/2017.
- */
 public class FuncTest {
     @Test
     public void convertTimeStampTest() throws Exception {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 public class PersonDBController {
@@ -55,7 +56,8 @@ public class PersonDBController {
 
     @RequestMapping(value = "/getPersonByName/{Name}")
     public Object getOneByName(@PathVariable("Name") String name) {
-        PersonDB entity = personServiceDB.findOneByName (name);
+      // PersonDB entity = personServiceDB.findOneByName (name);
+        PersonDB entity = personServiceDB.findByName (name);
         if (entity == null) {
             return "is empty";
         }
@@ -101,10 +103,10 @@ public class PersonDBController {
     }
 
     @PostMapping(value = "/personList")
-    public Object AddPerson(@RequestBody PersonDTO person) {
-        System.out.println (person.getSelect ());
-        System.out.println (person.getDemo ());
-        System.out.println (person.getName ());
+    public Object AddPerson(@RequestBody PersonDTO person) throws Exception {
+        long time= new Random().nextInt (2000);
+        System.out.println (time);
+        Thread.sleep (time);
         return person;
     }
 

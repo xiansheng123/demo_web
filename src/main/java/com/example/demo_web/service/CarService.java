@@ -18,10 +18,18 @@ public class CarService {
     @Autowired
     CarDBRespository carDBRespository;
 
-    public CarDB getCarbyName(String name){
-        return  carDBRespository.findByName(name).get(0);
+    public CarDB getCarbyName(String name) {
+        List<CarDB> carlist = carDBRespository.findByName (name);
+
+        return carlist.isEmpty () ? null : carlist.get (0);
     }
-    public CarDB getCarbyBrand(String brand){
-        return  carDBRespository.findByBrand(brand).get(0);
+
+    public CarDB getCarbyBrand(String brand) {
+        return carDBRespository.findByBrand (brand).get (0);
     }
+
+    public void saveCar(CarDB carDB) {
+        carDBRespository.save (carDB);
+    }
+
 }

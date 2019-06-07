@@ -18,7 +18,7 @@ import java.util.List;
 public interface CarDBRespository extends JpaRepository<CarDB, Integer> {
    // @Cacheable(value="findByName")
 
-    @Cacheable
+   // @Cacheable
     List<CarDB> findByName(String name);
 
     @Cacheable(value="findByBrand")

@@ -5,15 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Person {
-    String id;
-    String firstname;
-    String lastname;
-    Integer age;
+public class Person extends Human {
+    private String id;
+    public String firstname;
+    private String lastname;
+    private Integer age;
+
 }

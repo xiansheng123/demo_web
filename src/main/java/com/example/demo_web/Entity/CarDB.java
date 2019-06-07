@@ -1,16 +1,20 @@
 package com.example.demo_web.Entity;
 
+import lombok.Builder;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="sec_cars")
+@Table(name = "sec_cars")
+@Builder
 public class CarDB {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "name")
     private String name;

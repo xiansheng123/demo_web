@@ -7,14 +7,20 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import javax.validation.constraints.Max;
+import java.util.*;
+
+import static com.example.demo_web.service.ThreadTest.TestThread;
+
 
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 //@EnableScheduling
 public class DemoWebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoWebApplication.class, args);
-	}
+    public static void main(String[] args) throws InterruptedException {
+        SpringApplication.run(DemoWebApplication.class, args);
+    }
+
 }
 

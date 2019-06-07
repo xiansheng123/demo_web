@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Person extends Human{
-    String id;
+public class Person1 extends Human{
+    String id2;
     String firstname;
     String lastname;
     Integer age;
